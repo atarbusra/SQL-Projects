@@ -1,0 +1,18 @@
+--Task: Create an overview of the addresses that are not associated to any customer.
+
+SELECT first_name, last_name, address FROM address a
+LEFT JOIN customer c
+ON a.address_id=c.address_id
+WHERE first_name IS NULL AND last_name IS NULL;
+
+--QUESTION:How many addresses are that?
+--SOLUTION:
+SELECT SUM(
+	CASE
+	WHEN first_name IS NULL AND last_name IS NULL
+	THEN 1
+	ELSE 0 --OPTIONAL
+	END
+) FROM address a
+LEFT JOIN customer c
+ON a.address_id=c.address_id;
