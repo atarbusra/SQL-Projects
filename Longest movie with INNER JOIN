@@ -1,0 +1,24 @@
+--Task: Create a list of the film titles including their title, length, and category name ordered descendingly by length. Filter the results to only the movies in the category 'Drama' or 'Sports'.
+
+--Question: In which category is the longest film and how long is it?
+--SOLUTION:
+
+SELECT title, length, c.name FROM
+film f
+INNER JOIN film_category fc
+ON f.film_id = fc.film_id
+INNER JOIN category c
+ON fc.category_id=c.category_id
+WHERE c.name IN ('Drama', 'Sports')
+ORDER BY c.name DESC;
+
+SELECT MAX(length), c.name FROM
+film f
+INNER JOIN film_category fc
+ON f.film_id = fc.film_id
+INNER JOIN category c
+ON fc.category_id=c.category_id
+WHERE c.name IN ('Drama', 'Sports')
+GROUP BY c.name
+ORDER BY MAX(length) DESC
+LIMIT 1;
