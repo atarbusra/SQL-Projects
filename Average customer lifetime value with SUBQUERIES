@@ -1,0 +1,22 @@
+--Task: Create a list that shows the "average customer lifetime value" grouped by the different districts.
+
+--Example:
+--If there are two customers in "District 1" where one customer has a total (lifetime) spent of $1000 and the second customer has a total spent of $2000 then the "average customer lifetime spent" in this district is $1500.
+
+--So, first, you need to calculate the total per customer and then the average of these totals per district.
+
+--Question: Which district has the highest average customer lifetime value?
+--SOLUTION:
+
+SELECT ROUND(AVG(rev_per_customer),2) AS avg_lifetime_value 
+,a.district 
+FROM (SELECT customer_id, 
+	    SUM(amount) as rev_per_customer
+	    FROM payment 
+	    GROUP BY customer_id) AS subquery
+INNER JOIN customer cu
+ON cu.customer_id=subquery.customer_id
+INNER JOIN address a
+ON a.address_id=cu.address_id
+GROUP BY a.district
+ORDER BY avg_lifetime_value DESC;
