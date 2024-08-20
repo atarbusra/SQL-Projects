@@ -1,0 +1,12 @@
+--Task: Create an overview of how many movies (titles) there are in each category (name).
+
+--Question: Which category (name) is the most common among the films?
+--SOLUTION:
+
+SELECT COUNT(title), c.name FROM film f
+INNER JOIN film_category fc
+ON f.film_id = fc.film_id
+INNER JOIN category c
+ON fc.category_id=c.category_id
+GROUP BY c.name
+ORDER BY COUNT(title) DESC;
