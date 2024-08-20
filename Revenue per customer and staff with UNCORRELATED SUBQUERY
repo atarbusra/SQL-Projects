@@ -1,0 +1,11 @@
+--Task: Create a list with the average of the sales amount each staff_id has per customer.
+
+--Question: Which staff (staff_id) makes on average more revenue per customer?
+--SOLUTION:
+
+SELECT staff_id, ROUND(AVG(total),2) FROM
+(SELECT staff_id, customer_id, SUM(amount) as total_revenue
+FROM payment
+GROUP BY staff_id, customer_id
+ORDER BY total_revenue DESC)
+GROUP BY staff_id;
