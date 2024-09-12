@@ -3,5 +3,4 @@ This SQL project includes data analysis queries of an online movie rental shop c
 
 ## Installation
 
-To run this project locally, you will need:
-- PostgreSQL
+To run this project locally, you will need PostgreSQL.
